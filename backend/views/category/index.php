@@ -37,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'title',
                     'description',
-                    'image',
                     
                     ['class' => \common\widgets\ActionColumn::class],
                 ],

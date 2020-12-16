@@ -10,7 +10,7 @@ use yii\db\ActiveRecord;
  * This is the model class for table "{{%category_attachment}}".
  *
  * @property integer $id
- * @property integer $category_id
+ * @property integer $product_id
  * @property string $base_url
  * @property string $path
  * @property string $url
@@ -19,16 +19,16 @@ use yii\db\ActiveRecord;
  * @property string $size
  * @property integer $order
  *
- * @property Category $category
+ * @property Product $product
  */
-class CategoryAttachment extends ActiveRecord
+class ProductAttachment extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%category_attachment}}';
+        return '{{%product_attachment}}';
     }
 
     /**
@@ -50,8 +50,8 @@ class CategoryAttachment extends ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'path'], 'required'],
-            [['category_id', 'size', 'order'], 'integer'],
+            [['product_id', 'path'], 'required'],
+            [['product_id', 'size', 'order'], 'integer'],
             [['base_url', 'path', 'type', 'name'], 'string', 'max' => 255]
         ];
     }
@@ -63,7 +63,7 @@ class CategoryAttachment extends ActiveRecord
     {
         return [
             'id' => Yii::t('common', 'ID'),
-            'category_id' => Yii::t('common', 'Category ID'),
+            'product_id' => Yii::t('common', 'Product ID'),
             'base_url' => Yii::t('common', 'Base Url'),
             'path' => Yii::t('common', 'Path'),
             'size' => Yii::t('common', 'Size'),
@@ -76,9 +76,9 @@ class CategoryAttachment extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategory()
+    public function getProduct()
     {
-        return $this->hasOne(Category::class, ['id' => 'category_id']);
+        return $this->hasOne(Product::class, ['id' => 'product_id']);
     }
 
     public function getUrl()

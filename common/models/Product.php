@@ -19,40 +19,35 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property Category $category
  * @property ProductOptions[] $productOptions
+ * @property ProductAttachment[] $productAttachments
  */
 class Product extends \yii\db\ActiveRecord
 {
     public $options;
+    public $attachments;
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'product';
+        return '{{%product}}';
     }
     public function behaviors()
     {
         return [
             TimestampBehavior::class,
-            /*
+
             [
                 'class' => UploadBehavior::class,
                 'attribute' => 'attachments',
                 'multiple' => true,
-                'uploadRelation' => 'articleAttachments',
+                'uploadRelation' => 'productAttachments',
                 'pathAttribute' => 'path',
                 'baseUrlAttribute' => 'base_url',
                 'orderAttribute' => 'order',
                 'typeAttribute' => 'type',
                 'sizeAttribute' => 'size',
                 'nameAttribute' => 'name',
-            ],
-            */
-            [
-                'class' => UploadBehavior::class,
-                'attribute' => 'image',
-                'pathAttribute' => 'thumbnail_path',
-                'baseUrlAttribute' => 'thumbnail_base_url',
             ],
         ];
     }
@@ -73,7 +68,7 @@ class Product extends \yii\db\ActiveRecord
             ['description', 'filter', 'filter' => 'trim'],
             ['description', 'required'],
 
-            [['image'], 'file', 'extensions' => 'jpg,jpeg,png'],
+            [['attachments'], 'safe'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],   ];
     }
 
@@ -86,7 +81,6 @@ class Product extends \yii\db\ActiveRecord
             'id' => Yii::t('common', 'ID'),
             'description' => Yii::t('common', 'Description'),
             'title' => Yii::t('common', 'Title'),
-            'image' => Yii::t('common', 'Image'),
             'category_id' => Yii::t('common', 'Category ID'),
             'created_at' => Yii::t('common', 'Created At'),
             'updated_at' => Yii::t('common', 'Created At'),
@@ -111,5 +105,9 @@ class Product extends \yii\db\ActiveRecord
     public function getProductOptions()
     {
         return $this->hasMany(ProductOptions::className(), ['product_id' => 'id']);
+    }
+    public function getProductAttachments()
+    {
+        return $this->hasMany(ProductAttachment::class, ['product_id' => 'id']);
     }
 }

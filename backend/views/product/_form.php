@@ -2,6 +2,7 @@
 
 use kartik\select2\Select2;
 use trntv\filekit\widget\Upload;
+use unclead\multipleinput\MultipleInput;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\web\JsExpression;

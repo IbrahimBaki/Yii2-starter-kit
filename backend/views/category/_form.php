@@ -20,7 +20,7 @@ use yii\web\JsExpression;
 
                 <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                 <?php echo $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
-                <?php echo $form->field($model, 'image')->widget(Upload::class,[
+                <?php echo $form->field($model, 'attachments')->widget(Upload::class,[
                         'url'=>['/file/storage/upload'],
                     'maxFileSize'=>5000000,
                     'acceptFileTypes' => new JsExpression('/(\.|\/)(gif|jpe?g|png)$/i'),

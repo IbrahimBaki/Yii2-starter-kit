@@ -4,6 +4,8 @@ namespace common\models;
 
 use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
+use yii\db\ActiveRecord;
+
 
 /**
  * This is the model class for table "category".
@@ -11,19 +13,19 @@ use Yii;
  * @property int $id
  * @property string|null $title
  * @property string|null $description
- * @property string|null $image
  *
  * @property Product[] $products
+ * @property CategoryAttachment[] $categoryAttachments
  */
-class Category extends \yii\db\ActiveRecord
+class Category extends ActiveRecord
 {
-    public $categoryImage;
+    public $attachments;
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'category';
+        return '{{%category}}';
     }
 
     public function behaviors()
@@ -31,12 +33,14 @@ class Category extends \yii\db\ActiveRecord
         return [
             [
                 'class' => UploadBehavior::class,
-                'attribute'=>'image',
-//                'pathAttribute' => 'path',
-//                'baseUrlAttribute' => 'base_url',
-//                'orderAttribute' => 'order',
-//                'typeAttribute' => 'type',
-//                'sizeAttribute' => 'size',
+                'attribute'=>'attachments',
+                'uploadRelation' => 'categoryAttachments',
+                'multiple' => true,
+                'pathAttribute' => 'path',
+                'baseUrlAttribute' => 'base_url',
+                'orderAttribute' => 'order',
+                'typeAttribute' => 'type',
+                'sizeAttribute' => 'size',
                 'nameAttribute' => 'name',
 
             ]
@@ -53,17 +57,12 @@ class Category extends \yii\db\ActiveRecord
 
             ['title', 'filter', 'filter' => 'trim'],
             ['title', 'required'],
-//            ['title', 'unique', 'targetClass' => Category::class, 'filter' => function ($query) {
-//                if (!$this->getModel()->isNewRecord) {
-//                    $query->andWhere(['not', ['id' => $this->getModel()->id]]);
-//                }
-//            }],
             ['title', 'string', 'min' => 2, 'max' => 255],
 
             ['description', 'filter', 'filter' => 'trim'],
             ['description', 'required'],
 
-            [['image'], 'safe'],
+            [['attachments'], 'safe'],
         ];
     }
 
@@ -90,5 +89,10 @@ class Category extends \yii\db\ActiveRecord
     public function getProducts()
     {
         return $this->hasMany(Product::className(), ['category_id' => 'id']);
+    }
+
+    public function getCategoryAttachments()
+    {
+        return $this->hasMany(CategoryAttachment::class, ['category_id' => 'id']);
     }
 }

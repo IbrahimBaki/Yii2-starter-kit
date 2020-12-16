@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use common\models\CategoryAttachment;
+use common\traits\FormAjaxValidationTrait;
 use Yii;
 use common\models\Category;
 use backend\models\search\CategorySearch;
@@ -14,6 +16,7 @@ use yii\filters\VerbFilter;
  */
 class CategoryController extends Controller
 {
+    use FormAjaxValidationTrait;
 
     /** @inheritdoc */
     public function behaviors()
@@ -36,9 +39,6 @@ class CategoryController extends Controller
     {
         $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->sort = [
-            'defaultOrder' => ['published_at' => SORT_DESC],
-        ];
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -65,6 +65,7 @@ class CategoryController extends Controller
     public function actionCreate()
     {
         $model = new Category();
+        $this->performAjaxValidation($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -83,7 +84,7 @@ class CategoryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $this->performAjaxValidation($model);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

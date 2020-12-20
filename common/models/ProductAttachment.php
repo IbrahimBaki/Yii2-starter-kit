@@ -50,9 +50,9 @@ class ProductAttachment extends ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'path'], 'required'],
-            [['product_id', 'size', 'order'], 'integer'],
-            [['base_url', 'path', 'type', 'name'], 'string', 'max' => 255]
+//            [['product_id', 'path'], 'required'],
+//            [['product_id', 'size', 'order'], 'integer'],
+//            [['base_url', 'path', 'type', 'name'], 'string', 'max' => 255]
         ];
     }
 

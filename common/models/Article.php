@@ -92,7 +92,7 @@ class Article extends ActiveRecord
             [
                 'class' => UploadBehavior::class,
                 'attribute' => 'attachments',
-//                'multiple' => true,
+                'multiple' => true,
                 'uploadRelation' => 'articleAttachments',
                 'pathAttribute' => 'path',
                 'baseUrlAttribute' => 'base_url',

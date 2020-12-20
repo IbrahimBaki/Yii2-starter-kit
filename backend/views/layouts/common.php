@@ -227,6 +227,30 @@ $logEntries[] = [
                             'icon' => FAS::icon('thumbtack', ['class' => ['nav-icon']]),
                             'active' => Yii::$app->controller->id === 'page',
                         ],
+##################################################################################################################
+
+                        [
+                            'label' => Yii::t('backend', 'Categories'),
+                            'url' => ['/category/index'],
+                            'icon' => FAS::icon('list', ['class' => ['nav-icon']]),
+                            'active' => Yii::$app->controller->id === 'category',
+                        ],
+##################################################################################################################
+
+                        [
+                            'label' => Yii::t('backend', 'Products'),
+                            'url' => ['/product/index'],
+                            'icon' => FAS::icon('camera', ['class' => ['nav-icon']]),
+                            'active' => Yii::$app->controller->id === 'product',
+                        ],
+##################################################################################################################
+                        [
+                            'label' => Yii::t('backend', 'Slider'),
+                            'url' => ['/slider/index'],
+                            'icon' => FAS::icon('exchange-alt', ['class' => ['nav-icon']]),
+                            'active' => Yii::$app->controller->id === 'slider',
+                        ],
+##################################################################################################################
                         [
                             'label' => Yii::t('backend', 'Articles'),
                             'url' => '#',

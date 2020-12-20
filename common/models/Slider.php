@@ -6,17 +6,16 @@ use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
 use yii\db\ActiveRecord;
 
-
 /**
- * This is the model class for table "category".
+ * This is the model class for table "slider".
  *
  * @property int $id
  * @property string|null $title
+ * @property string|null $type
  * @property string|null $description
  *
- * @property Product[] $products
  */
-class Category extends ActiveRecord
+class Slider extends ActiveRecord
 {
     public $image;
     /**
@@ -24,20 +23,20 @@ class Category extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%category}}';
+        return '{{%slider}}';
     }
 
     public function behaviors()
     {
         return [
             [
-                'class' => UploadBehavior::class,
-                'attribute'=>'image',
-                'pathAttribute' => 'image_path',
-                'baseUrlAttribute' => 'image_base_url',
-                'nameAttribute' => 'image_name',
-
+                'class'=> UploadBehavior::class,
+                'attribute' => 'image',
+                'pathAttribute'=>'image_path',
+                'baseUrlAttribute'=>'image_base_url',
+                'nameAttribute'=>'image_name'
             ]
+
         ];
 
     }
@@ -48,6 +47,7 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
+            [['type'], 'string', 'max' => 30],
 
             ['title', 'filter', 'filter' => 'trim'],
             ['title', 'required'],
@@ -55,6 +55,7 @@ class Category extends ActiveRecord
 
             ['description', 'filter', 'filter' => 'trim'],
             ['description', 'required'],
+            ['description', 'string', 'min' => 2, 'max' => 255],
 
             [['image'], 'safe'],
         ];
@@ -68,20 +69,9 @@ class Category extends ActiveRecord
         return [
             'id' => Yii::t('common', 'ID'),
             'description' => Yii::t('common', 'Description'),
+            'type' => Yii::t('common', 'Type'),
             'title' => Yii::t('common', 'Title'),
             'image' => Yii::t('common', 'Image'),
-
-
         ];
-    }
-
-    /**
-     * Gets query for [[Products]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProducts()
-    {
-        return $this->hasMany(Product::className(), ['category_id' => 'id']);
     }
 }

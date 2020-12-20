@@ -3,6 +3,9 @@
 namespace frontend\controllers;
 
 use cheatsheet\Time;
+use common\models\Category;
+use common\models\Product;
+use common\models\Slider;
 use common\sitemap\UrlsIterator;
 use frontend\models\ContactForm;
 use Sitemaped\Element\Urlset\Urlset;
@@ -57,7 +60,41 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $products = Product::find()->all();
+        $categories = Category::find()->all();
+        $sliders = Slider::find()->all();
+        return $this->render('index',[
+            'products'=>$products,
+            'categories'=>$categories,
+            'sliders'=>$sliders,
+        ]);
+    }
+    public function actionAbout()
+    {
+        return $this->render('about');
+    }
+
+    public function actionProduct()
+    {
+        $products = Product::find()->all();
+        return $this->render('product',[
+            'products'=>$products
+        ]);
+    }
+    public function actionBlog()
+    {
+        return $this->render('blog');
+    }
+
+    public function actionProductDetails($id)
+    {
+        $model = Product::findOne($id);
+
+        return $this->render('product-details',[
+            'model'=>$model,
+        ]);
+
+
     }
 
     /**

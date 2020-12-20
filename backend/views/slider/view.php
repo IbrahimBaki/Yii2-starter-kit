@@ -1,21 +1,18 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\DetailView;
-
-//use yii\widgets\DetailView;
 
 /**
  * @var yii\web\View $this
- * @var common\models\Category $model
+ * @var common\models\Slider $model
  */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Sliders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="category-view">
+<div class="slider-view">
     <div class="card">
         <div class="card-header">
             <?php echo Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -33,17 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     'title',
+                    'type',
                     'description',
-                    [
-                        'attribute'=>'image',
-                        'format'=>'html',
-                        'label'=>'Image',
-//                      'value'=>Html::img($model->image_base_url .'/'. $model->image_path,['width'=>'60px']),
-                      'value'=>'<img src="'. Url::to('@storage/source/' . $model->image_path).'" alt="' .$model->title. '">',
-//                      'value'=>function($data) {
-//                         return Html::img(Url::to('@storageUrl/source/' . $data->image_path), ['width' => '60px']);
-//                     }
-                    ],
+                    'image_name',
+                    'image_base_url:url',
+                    'image_path',
                     
                 ],
             ]) ?>

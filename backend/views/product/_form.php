@@ -63,11 +63,15 @@ use yii\web\JsExpression;
                     'enableGuessTitle'=>true,
                     'addButtonPosition'=>MultipleInput::POS_HEADER,
                 ])->label(false) ?>
-                <?php echo $form->field($model, 'attachments')->widget(Upload::class,[
-                    'url'=>['/file/storage/upload'],
-                    'maxFileSize'=>5000000,
-                    'acceptFileTypes' => new JsExpression('/(\.|\/)(gif|jpe?g|png)$/i'),
-                ])?>
+                <?php echo $form->field($model, 'attachments')->widget(
+                    Upload::class,
+                    [
+                        'url' => ['/file/storage/upload'],
+                        'sortable' => true,
+                        'maxFileSize' => 10000000, // 10 MiB
+                        'maxNumberOfFiles' => 10,
+                    ]
+                ) ?>
 
                 
             </div>

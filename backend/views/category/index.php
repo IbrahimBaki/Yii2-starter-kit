@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /**
  * @var yii\web\View $this
@@ -37,6 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'title',
                     'description',
+                    [
+                        'attribute'=>'image',
+                        'format'=>'html',
+                        'label'=>'Image',
+                        'value'=>function($data){
+                            return Html::img(Url::to('@storageUrl/source/'). $data->image_path ,['width'=>'60px','height'=>'60px']);
+                        }
+                    ],
                     
                     ['class' => \common\widgets\ActionColumn::class],
                 ],

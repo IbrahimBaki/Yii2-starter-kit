@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ProductAttachment;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -38,10 +39,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title',
                     'category_id',
                     'description',
-                    'image',
-                    // 'created_at',
-                    // 'updated_at',
-                    
+                    [
+                        'attribute'=>'image',
+                        'format'=>'html',
+                        'label'=>'Image',
+                        'value'=>function($data){
+                            $data->attachments = ProductAttachment::find()->where('product_id=:id',['id'=>$data->id])->all();
+                            foreach ($data->attachments as $attachment){
+                                $image = $attachment;
+                                break;
+                            }
+                            return Html::img(Yii::getAlias('@storageUrl/source/'). $image->path ,['width'=>'60px','height'=>'60px']);
+                        }
+                    ],
                     ['class' => \common\widgets\ActionColumn::class],
                 ],
             ]); ?>

@@ -41,7 +41,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php foreach ($products as $product): ?>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="product-box" style="width: 240px;height: 301px">
-                        <i><?= Html::img(Yii::getAlias('@storage/web/source/').$product->title,['style'=>'width:160px;height:160px'])?></i>
+                        <i><?php
+                            foreach ($product->productAttachments as $productAttachment) {
+                                echo Html::img(Yii::getAlias('@storageUrl/source/').$productAttachment->path,['style'=>'width:180px;height:200px']);
+                                break;
+                            }
+                            ?></i>
                         <h3><?= $product->title ?></h3>
                         <?php
                         foreach ($product->productOptions as $option){

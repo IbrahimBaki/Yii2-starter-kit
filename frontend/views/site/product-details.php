@@ -29,7 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <dir class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                 <div class="about_box">
                     <figure>
-                    <?= Html::img(Yii::getAlias('@storage/web/source/').$model->title) ?>
+                        <i><?php
+                            foreach ($model->productAttachments as $productAttachment) {
+                                echo Html::img(Yii::getAlias('@storageUrl/source/').$productAttachment->path);
+                                break;
+                            }
+                            ?></i>
                     </figure>
                 </div>
             </dir>

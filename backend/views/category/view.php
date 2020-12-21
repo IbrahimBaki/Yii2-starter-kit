@@ -38,11 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute'=>'image',
                         'format'=>'html',
                         'label'=>'Image',
-//                      'value'=>Html::img($model->image_base_url .'/'. $model->image_path,['width'=>'60px']),
-                      'value'=>'<img src="'. Url::to('@storage/source/' . $model->image_path).'" alt="' .$model->title. '">',
-//                      'value'=>function($data) {
-//                         return Html::img(Url::to('@storageUrl/source/' . $data->image_path), ['width' => '60px']);
-//                     }
+                      'value'=>Html::img(Url::to('@storageUrl/source/' . $model->image_path),['width'=>'60px']),
                     ],
                     
                 ],

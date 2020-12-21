@@ -56,11 +56,11 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
                                         <li> <?= Html::a('blog', ['blog']) ?> </li>
                                         <li> <?= Html::a('Contact', ['contact']) ?> </li>
                                         <?php if(Yii::$app->user->isGuest): ?>
-                                            <li> <?= Html::a('Login', ['login']) ?> </li>
-                                            <li class="mean-last"> <?= Html::a('signup', ['signup']) ?> </li>
+                                            <li> <?= Html::a('Login', ['/user/sign-in/login']) ?> </li>
+                                            <li class="mean-last"> <?= Html::a('signup', ['/user/sign-in/signup']) ?> </li>
                                         <?php else: ?>
 
-                                            <li class="mt-3"> <?= Html::beginForm(['/site/logout'], 'post')
+                                            <li class="mt-3"> <?= Html::beginForm(['/user/sign-in/logout'], 'post')
                                                 . Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')',['class'=>'buy']) . Html::endForm() ?> </li>
 
 

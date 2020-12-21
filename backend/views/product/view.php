@@ -1,5 +1,6 @@
 <?php
 
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -32,9 +33,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title',
                     'category_id',
                     'description',
-                    'image',
-                    'created_at',
-                    'updated_at',
+                    [
+                        'attribute' => 'image',
+                        'format'=>'html',
+                        'label'=>'Image',
+//                        'value'=>Html::img(Yii::getAlias('@storageUrl/source/').$image->path,['width'=>'60px']),
+                         'value'=>function($data){
+                              foreach($data->productAttachments as $image){
+                                  return Html::img(Yii::getAlias('@storageUrl/source/').$image->path,['width'=>'60px']);
+                             }
+                          }
+                    ],
+                    [
+                        'attribute'=>'created_at',
+                        'value'=>date('Y-m-d',$model->created_at),
+                    ],
+                    [
+                        'attribute'=>'updated_at',
+                        'value'=>date('Y-m-d',$model->updated_at),
+                    ],
                     
                 ],
             ]) ?>

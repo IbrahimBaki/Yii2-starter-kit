@@ -6,6 +6,7 @@
 /* @var $sliders common\models\Slider */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Home';
 ?>
@@ -17,8 +18,8 @@ $this->title = 'Home';
             $i = 0;
             foreach ($sliders as $slider):?>
                 <div class="carousel-item <?= $i==0 ? 'active' : ''?>">
-<!--                    --><?php //Html::img(Yii::getAlias('@staticPath/images/'). $slider->image,['style'=>'height:657px;width:1920px']) ?>
-                    <img src="/@storage/source/1/<?= $slider->image_name?>" style="height:657px;width:1920px" alt="<?= $slider->image_name ?>">
+
+                    <img src="<?= Yii::getAlias('@storageUrl/source/').$slider->image_path?>" style="height:457px;width:1920px" alt="<?= $slider->image_name ?>">
                     <div class="container">
                         <div class="carousel-caption relative">
                             <h1>Latest <br> <strong class="black_bold"> <?= $slider->type ?> </strong><br>
@@ -68,7 +69,7 @@ $this->title = 'Home';
                 <?php foreach ($categories as $category): ?>
                     <dir class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                         <div class="for_box" style="width: 200px;height: 311px">
-                            <img src="<?= Yii::getAlias('@storage/web/source/').$category->image_path?>" style="width:164px;height:164px;border-radius: 45%" alt="<?= $category->image_name ?>">
+                            <img src="<?= Yii::getAlias('@storageUrl/source/').$category->image_path?>" style="width:164px;height:164px;border-radius: 45%" alt="<?= $category->image_name ?>">
                             <h3><?= $category-> title?></h3>
                             <p><?= $category-> description?></p>
                         </div>
@@ -163,8 +164,12 @@ $this->title = 'Home';
                 <?php foreach ($products as $product): ?>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                         <div class="product-box" style="width: 240px;height: 301px">
-<!--                            <i>--><?php //echo Html::img(Yii::getAlias('@staticPath/images/').$product->image,['style'=>'width:160px;height:160px'])?><!--</i>-->
-                            <img src="<?=Yii::getAlias('@storage/web/source/').$category->image_path?>" style="width:160px;height:160px" alt="<?= $slider->image_name ?>">
+                           <i><?php
+                               foreach ($product->productAttachments as $productAttachment) {
+                                   echo Html::img(Yii::getAlias('@storageUrl/source/').$productAttachment->path,['style'=>'width:180px;height:200px']);
+                                   break;
+                               }
+                               ?></i>
                             <h3><?= $product->title ?></h3>
                             <?php
                             // $price =  $product->productColors->findOne()

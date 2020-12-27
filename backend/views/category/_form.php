@@ -1,6 +1,7 @@
 <?php
 
 use trntv\filekit\widget\Upload;
+use webvimark\behaviors\multilanguage\input_widget\MultiLanguageActiveField;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\web\JsExpression;
@@ -18,7 +19,7 @@ use yii\web\JsExpression;
             <div class="card-body">
                 <?php echo $form->errorSummary($model); ?>
 
-                <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                <?php echo $form->field($model, 'title')->textInput(['maxlength' => true])->widget(MultiLanguageActiveField::className())?>
                 <?php echo $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
                 <?php echo $form->field($model, 'image')->widget(
                     Upload::class,

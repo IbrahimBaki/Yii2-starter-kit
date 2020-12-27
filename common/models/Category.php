@@ -3,6 +3,8 @@
 namespace common\models;
 
 use trntv\filekit\behaviors\UploadBehavior;
+use webvimark\behaviors\multilanguage\MultiLanguageBehavior;
+use webvimark\behaviors\multilanguage\MultiLanguageTrait;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -18,6 +20,7 @@ use yii\db\ActiveRecord;
  */
 class Category extends ActiveRecord
 {
+//    use MultiLanguageTrait;
     public $image;
     /**
      * {@inheritdoc}
@@ -37,7 +40,18 @@ class Category extends ActiveRecord
                 'baseUrlAttribute' => 'image_base_url',
                 'nameAttribute' => 'image_name',
 
-            ]
+            ],
+//            'mlBehavior'=>[
+//                'class'    => MultiLanguageBehavior::className(),
+//                'mlConfig' => [
+//                    'db_table'         => 'translations_with_string',
+//                    'attributes'       => ['name'],
+//                    'admin_routes'     => [
+//                        'content/page/update',
+//                        'content/page/index',
+//                    ],
+//                ],
+//            ],
         ];
 
     }

@@ -22,14 +22,14 @@ class FrontendAsset extends AssetBundle
      * @var string
      */
     public $sourcePath = '@frontend/web/bundle';
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+//    public $basePath = '@webroot';
+//    public $baseUrl = '@web';
 
     /**
      * @var array
      */
     public $css = [
-//        'style.css',
+        'style.css',
         'css/bootstrap.min.css',
         'css/style.css',
         'css/responsive.css',
@@ -45,7 +45,7 @@ class FrontendAsset extends AssetBundle
      * @var array
      */
     public $js = [
-//        'app.js',
+        'app.js',
         'https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js',
         'https://oss.maxcdn.com/respond/1.4.2/respond.min.js',
         'js/jquery.min.js',

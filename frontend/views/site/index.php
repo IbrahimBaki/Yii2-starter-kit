@@ -55,7 +55,7 @@ $this->title = 'Home';
         <div class="row">
             <div class="col-md-7 offset-md-3">
                 <div class="title">
-                    <h2>Our <strong class="black">Categories</strong></h2>
+                    <h2>Our <strong class="black"> <?= Yii::t('frontend', 'Categories') ?></strong></h2>
                     <span>Great Collection For All Ages and Various Categories </span>
                 </div>
             </div>

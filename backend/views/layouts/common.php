@@ -135,6 +135,16 @@ $logEntries[] = [
                 </li>
                 ',
                 [
+                'label'=>Yii::t('backend', 'Language'),
+                'items'=>array_map(function ($code) {
+                    return [
+                        'label' => Yii::$app->params['availableLocales'][$code],
+                        'url' => ['/site/set-locale', 'locale'=>$code],
+                        'active' => Yii::$app->language === $code
+                    ];
+                }, array_keys(Yii::$app->params['availableLocales']))
+            ],
+                [
                     // control sidebar button
                     'label' => FAS::icon('th-large'),
                     'url'  => '#',
